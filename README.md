@@ -36,7 +36,7 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite (usually <http://localhost:5173>). Use the arrow keys, WASD, or tap a highlighted neighboring tile. Levels unlock in order after winning. The browser stores the unlocked level in local storage.
+Open the local URL printed by Vite (usually <http://localhost:5173>). Use the arrow keys or WASD, tap a highlighted neighboring tile, or use the on-screen directional pad on phones and touch devices. Levels unlock in order after winning. The browser stores the unlocked level in local storage.
 
 To create a static production build, run `npm run build`. To serve that build locally, run `npm run preview`.
 

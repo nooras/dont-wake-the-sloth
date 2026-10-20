@@ -51,7 +51,7 @@ function App() {
   const [levelIndex, setLevelIndex] = useState(0);
   const [unlockLevel, setUnlockLevel] = useState(storedUnlock);
   const [game, setGame] = useState(() => initialLevelState(levels[0]));
-  const [message, setMessage] = useState("Use arrow keys, WASD, or tap a highlighted tile.");
+  const [message, setMessage] = useState("Use arrow keys, WASD, or tap a highlighted tile or direction button.");
   const [assistantText, setAssistantText] = useState(WELCOME);
   const [captureEffect, setCaptureEffect] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -95,7 +95,7 @@ function App() {
       setLevelIndex(index);
       setGame(initialLevelState(levels[index]));
       setCaptureEffect(null);
-      setMessage("Use arrow keys, WASD, or tap a highlighted tile.");
+      setMessage("Use arrow keys, WASD, or tap a highlighted tile or direction button.");
       setAssistantText(WELCOME);
       audio.stage("sleeping");
     },
@@ -309,7 +309,7 @@ function App() {
     setBusy(false);
     setGame(initialLevelState(level));
     setCaptureEffect(null);
-    setMessage("Use arrow keys, WASD, or tap a highlighted tile.");
+    setMessage("Use arrow keys, WASD, or tap a highlighted tile or direction button.");
     setAssistantText(WELCOME);
     audio.stage("sleeping");
   }
@@ -431,6 +431,38 @@ function App() {
               )}
             </div>
           </div>
+          <div className="touch-controls" role="group" aria-label="Touch movement controls">
+            <button
+              className="touch-button touch-up"
+              type="button"
+              aria-label="Move up"
+              disabled={!moves.some((move) => move.direction === "U") || busy}
+              onClick={() => makeMove("U")}
+            >↑</button>
+            <button
+              className="touch-button touch-left"
+              type="button"
+              aria-label="Move left"
+              disabled={!moves.some((move) => move.direction === "L") || busy}
+              onClick={() => makeMove("L")}
+            >←</button>
+            <span className="touch-center" aria-hidden="true">MOVE</span>
+            <button
+              className="touch-button touch-right"
+              type="button"
+              aria-label="Move right"
+              disabled={!moves.some((move) => move.direction === "R") || busy}
+              onClick={() => makeMove("R")}
+            >→</button>
+            <button
+              className="touch-button touch-down"
+              type="button"
+              aria-label="Move down"
+              disabled={!moves.some((move) => move.direction === "D") || busy}
+              onClick={() => makeMove("D")}
+            >↓</button>
+          </div>
+          <p className="touch-hint">Tap a highlighted tile or use the arrows to move.</p>
           <div className="legend">
             <span>🧱 wall</span><span>🍃 leaf · silent</span><span>🪵 twig · loud</span>
             <span>🐒 monkey</span><span>🍌 target</span><span>🦥 sleeping</span>

@@ -27,6 +27,7 @@ button, input { font: inherit; }
 button { color: inherit; cursor: pointer; }
 button:disabled { opacity: .72; cursor: not-allowed; transform: none !important; }
 button:focus-visible, input:focus-visible { outline: 3px solid #8bb595; outline-offset: 2px; }
+button { touch-action: manipulation; }
 
 .page { width: min(1120px, calc(100% - 30px)); margin: 0 auto; padding: 25px 0 40px; }
 header { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
@@ -79,6 +80,7 @@ h2 { margin: 0; font-size: 17px; }
   font-size: clamp(17px, 3vw, 25px);
   transition: transform .13s ease, filter .13s ease, outline .13s ease;
 }
+.tile { touch-action: manipulation; }
 .tile:disabled { opacity: 1; cursor: default; }
 .tile:hover:not(:disabled) { filter: brightness(1.035); transform: translateY(-1px); }
 .tile.wall { border-color: #b8c0ae; background: #d6d8cc; }
@@ -98,6 +100,26 @@ h2 { margin: 0; font-size: 17px; }
 @keyframes noisy { to { filter: saturate(1.4) brightness(1.07); } }
 
 .legend { display: flex; flex-wrap: wrap; gap: 7px 13px; margin: 10px 0 0; color: var(--muted); font-size: 11px; }
+.touch-controls { display: none; }
+.touch-hint { display: none; }
+.touch-button {
+  display: grid;
+  width: 56px;
+  min-height: 52px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #cbdac5;
+  border-radius: 15px;
+  background: #edf4e8;
+  color: var(--accent);
+  font-size: 25px;
+  font-weight: 900;
+  box-shadow: 0 3px 0 #d6e2d0;
+  -webkit-tap-highlight-color: transparent;
+}
+.touch-button:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 #d6e2d0; }
+.touch-button:disabled { opacity: .42; }
+.touch-center { display: grid; min-width: 56px; min-height: 52px; place-items: center; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .1em; }
 .stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 16px; }
 .stat { min-width: 0; padding: 10px 11px; border: 1px solid var(--line); border-radius: 13px; background: #fffefa; }
 .stat span { display: block; color: var(--muted); font-size: 10px; font-weight: 850; letter-spacing: .05em; text-transform: uppercase; }
@@ -145,6 +167,49 @@ summary { color: var(--muted); cursor: pointer; font-size: 11px; font-weight: 85
   .head-actions { justify-content: flex-start; }
   .layout { grid-template-columns: 1fr; }
   .board { margin: 0 auto; }
+}
+@media (max-width: 760px), (pointer: coarse) {
+  body { font-size: 16px; }
+  .eyebrow { font-size: 11px; }
+  h1 { font-size: clamp(24px, 6vw, 30px); }
+  h2 { font-size: 19px; }
+  .button { min-height: 44px; font-size: 14px; }
+  .level-name { font-size: 14px; }
+  .stage { font-size: 13px; }
+  .legend { font-size: 13px; }
+  .stat span { font-size: 12px; }
+  .stat strong { font-size: 21px; }
+  .level-tip { font-size: 15px; }
+  .message { font-size: 15px; }
+  .agent-heading p { font-size: 13px; }
+  .agent-text { font-size: 15px; }
+  .level-choice { min-height: 44px; font-size: 14px; }
+  .level-choice span:last-child { font-size: 12px; }
+  summary { font-size: 13px; }
+  .settings label { font-size: 13px; }
+  .settings input { min-height: 42px; font-size: 15px; }
+  .settings-note { font-size: 13px; }
+  .local-badge { font-size: 13px; }
+  .touch-hint { font-size: 13px; }
+  .touch-center { font-size: 11px; }
+  .footer-note { font-size: 12px; }
+  .site-footer { font-size: 13px; }
+  .touch-controls {
+    display: grid;
+    grid-template: repeat(3, 52px) / repeat(3, 56px);
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    gap: 5px;
+    margin: 12px auto 0;
+    touch-action: manipulation;
+  }
+  .touch-up { grid-area: 1 / 2; }
+  .touch-left { grid-area: 2 / 1; }
+  .touch-center { grid-area: 2 / 2; }
+  .touch-right { grid-area: 2 / 3; }
+  .touch-down { grid-area: 3 / 2; }
+  .touch-hint { display: block; margin: 9px 0 0; color: var(--muted); font-size: 11px; text-align: center; }
 }
 @media (max-width: 430px) {
   .stats { grid-template-columns: 1fr 1fr; }
