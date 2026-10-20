@@ -42,6 +42,15 @@ To create a static production build, run `npm run build`. To serve that build lo
 
 The first interaction starts the Web Audio ambient jungle and slow lullaby; use the mute button and volume slider to adjust them. Audio is synthesized with the Web Audio API.
 
+## Deploy to Render
+
+The root `render.yaml` defines this as a Render **Static Site**. In Render, create a Blueprint from the Git repository containing this file, or create a Static Site manually with:
+
+- Build command: `npm ci && npm run build`
+- Publish directory: `dist`
+
+The Blueprint also rewrites application routes to `index.html`, and `package.json` specifies a compatible Node.js version for Vite. Browser AI features call Ollama at the configured address; on a hosted site, `localhost` means the visitor's own computer, so Ollama must be running there and permit the deployed site origin.
+
 ### Connect browser Gemma
 
 The browser game calls Ollama on `http://localhost:11434/api/chat`, using the model name from **Local Gemma settings** (default `gemma3:latest`). Install the model first with `ollama pull gemma3`. If the browser cannot access Ollama due to origin policy, launch Ollama with browser access enabled:

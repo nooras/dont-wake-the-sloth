@@ -91,6 +91,10 @@ h2 { margin: 0; font-size: 17px; }
 .tile.monkey { border-color: #e4c58f; background: #f5e7c8; }
 .tile.highlight { outline: 3px solid #83a77c; outline-offset: 1px; }
 .tile.noisy { animation: noisy .6s ease-in-out infinite alternate; }
+.tile.captured { position: relative; z-index: 1; animation: capture-pop .8s ease-out both; }
+.capture-burst { position: absolute; top: -4px; right: -2px; font-size: .62em; animation: sparkle .8s ease-out both; }
+@keyframes capture-pop { 0% { transform: scale(.8); } 35% { transform: scale(1.18); } 100% { transform: scale(1); } }
+@keyframes sparkle { 0% { opacity: 0; transform: translateY(5px) scale(.5); } 35% { opacity: 1; transform: translateY(-5px) scale(1.2); } 100% { opacity: 0; transform: translateY(-14px) scale(.8); } }
 @keyframes noisy { to { filter: saturate(1.4) brightness(1.07); } }
 
 .legend { display: flex; flex-wrap: wrap; gap: 7px 13px; margin: 10px 0 0; color: var(--muted); font-size: 11px; }

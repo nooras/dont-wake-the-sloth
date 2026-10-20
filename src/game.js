@@ -58,6 +58,7 @@ export function transition(grid, source, direction) {
   const monkeyIndex = monkeys.findIndex((monkey) => monkey.row === row && monkey.col === col);
   let pushed = false;
   let captured = false;
+  let capturedAt = null;
 
   if (monkeyIndex !== -1) {
     const beyondRow = row + dr;
@@ -72,7 +73,10 @@ export function transition(grid, source, direction) {
     }
     pushed = true;
     captured = beyondTile === "B";
-    if (captured) monkeys.splice(monkeyIndex, 1);
+    if (captured) {
+      capturedAt = { row: beyondRow, col: beyondCol };
+      monkeys.splice(monkeyIndex, 1);
+    }
     else monkeys[monkeyIndex] = { row: beyondRow, col: beyondCol };
   }
 
@@ -93,6 +97,7 @@ export function transition(grid, source, direction) {
     tile,
     pushed,
     captured,
+    capturedAt,
     noiseCost,
   };
 }

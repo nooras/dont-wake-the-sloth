@@ -53,6 +53,7 @@ function App() {
   const [game, setGame] = useState(() => initialLevelState(levels[0]));
   const [message, setMessage] = useState("Use arrow keys, WASD, or tap a highlighted tile.");
   const [assistantText, setAssistantText] = useState(WELCOME);
+  const [captureEffect, setCaptureEffect] = useState(null);
   const [busy, setBusy] = useState(false);
   const [muted, setMuted] = useState(false);
   const [volume, setVolume] = useState(0.28);
@@ -61,6 +62,7 @@ function App() {
   const [model, setModel] = useState("gemma3:latest");
   const audioRef = useRef(null);
   const requestRef = useRef(0);
+  const captureTimerRef = useRef(null);
 
   if (!audioRef.current) audioRef.current = createAudio();
   const audio = audioRef.current;
@@ -79,6 +81,12 @@ function App() {
     };
   }, [audio]);
 
+  useEffect(() => {
+    if (!captureEffect) return undefined;
+    captureTimerRef.current = window.setTimeout(() => setCaptureEffect(null), 1100);
+    return () => window.clearTimeout(captureTimerRef.current);
+  }, [captureEffect]);
+
   const loadLevel = useCallback(
     (index) => {
       if (index < 0 || index >= levels.length || index + 1 > unlockLevel) return;
@@ -86,6 +94,7 @@ function App() {
       setBusy(false);
       setLevelIndex(index);
       setGame(initialLevelState(levels[index]));
+      setCaptureEffect(null);
       setMessage("Use arrow keys, WASD, or tap a highlighted tile.");
       setAssistantText(WELCOME);
       audio.stage("sleeping");
@@ -150,6 +159,7 @@ function App() {
       };
       audio.action(outcome.tile, outcome.pushed, outcome.captured, outcome.noiseCost);
       const { nextGame: stagedGame, crossedHalf } = updateNoiseStage(nextGame);
+      if (outcome.captured) setCaptureEffect(outcome.capturedAt);
 
       if (stagedGame.noise >= level.noiseLimit) {
         stagedGame.gameOver = true;
@@ -196,7 +206,11 @@ function App() {
       }
 
       setGame(stagedGame);
-      setMessage(`${key}: ${outcome.pushed ? "monkey pushed" : "quiet step"} · +${outcome.noiseCost} noise.`);
+      setMessage(
+        outcome.captured
+          ? `Monkey captured on the banana! +${outcome.noiseCost} noise.`
+          : `${key}: ${outcome.pushed ? "monkey pushed" : "quiet step"} · +${outcome.noiseCost} noise.`,
+      );
       if (crossedHalf) askDream(stagedGame);
     },
     [
@@ -294,6 +308,7 @@ function App() {
     requestRef.current += 1;
     setBusy(false);
     setGame(initialLevelState(level));
+    setCaptureEffect(null);
     setMessage("Use arrow keys, WASD, or tap a highlighted tile.");
     setAssistantText(WELCOME);
     audio.stage("sleeping");
@@ -374,8 +389,16 @@ function App() {
                   const isPlayer = game.player.row === row && game.player.col === col;
                   const hasMonkey = game.monkeys.some((monkey) => monkey.row === row && monkey.col === col);
                   const isLegal = moves.some((move) => move.to.row === row && move.to.col === col);
+                  const isCaptureEffect =
+                    captureEffect?.row === row && captureEffect?.col === col && !hasMonkey;
                   const character = isPlayer ? "🧑" : hasMonkey ? "🐒" : TILE_EMOJI[tile];
-                  const label = isPlayer ? "player" : hasMonkey ? "monkey" : TILE_LABELS[tile] || "floor";
+                  const label = isPlayer
+                    ? "player"
+                    : hasMonkey
+                      ? "monkey"
+                      : isCaptureEffect
+                        ? "banana, monkey captured"
+                        : TILE_LABELS[tile] || "floor";
                   return (
                     <button
                       key={`${row}-${col}`}
@@ -384,6 +407,7 @@ function App() {
                         LEVEL_COLORS[tile] || "floor",
                         isPlayer && "player",
                         hasMonkey && "monkey",
+                        isCaptureEffect && "captured",
                         isLegal && "highlight",
                         game.gameOver && !game.won && tile !== "#" && tile !== "S" && "noisy",
                       ].filter(Boolean).join(" ")}
@@ -396,7 +420,11 @@ function App() {
                         if (move) makeMove(move.direction);
                       }}
                     >
-                      {character}
+                      {isCaptureEffect ? (
+                        <>
+                          <span>🍌</span><span className="capture-burst" aria-hidden="true">✨</span>
+                        </>
+                      ) : character}
                     </button>
                   );
                 }),
