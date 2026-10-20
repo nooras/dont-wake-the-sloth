@@ -135,6 +135,9 @@ summary { color: var(--muted); cursor: pointer; font-size: 11px; font-weight: 85
 .settings-note { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.45; }
 .local-badge { padding: 10px 12px; border: 1px solid #d6e5d2; border-radius: 12px; background: #eef5e9; color: #46694b; font-size: 11px; font-weight: 800; text-align: center; }
 .footer-note { margin: 13px 0 0; color: var(--muted); font-size: 10px; text-align: center; }
+.site-footer { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.site-footer a { color: var(--accent); font-weight: 800; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.site-footer a:hover { color: #2f5439; }
 
 @media (max-width: 760px) {
   .page { width: min(600px, calc(100% - 22px)); padding-top: 16px; }

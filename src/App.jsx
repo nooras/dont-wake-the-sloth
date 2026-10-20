@@ -521,6 +521,12 @@ function App() {
       <p className="footer-note">
         No external images or audio files. Game rules are deterministic; Gemma only provides suggestions and commentary.
       </p>
+      <footer className="site-footer">
+        <span>Created by Nooras Fatima</span>
+        <a href="https://github.com/nooras/dont-wake-the-sloth" target="_blank" rel="noreferrer">
+          View the GitHub repository
+        </a>
+      </footer>
     </main>
   );
 }
