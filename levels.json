@@ -1,0 +1,145 @@
+[
+  {
+    "id": 1,
+    "name": "First Tiptoe",
+    "noiseLimit": 9,
+    "par": 5,
+    "tip": "Push the monkey down onto the banana. Avoid tiles next to the sloth.",
+    "grid": [
+      "######",
+      "#S...#",
+      "#.P.M#",
+      "#...B#",
+      "######"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Straight Shot",
+    "noiseLimit": 9,
+    "par": 5,
+    "tip": "Leaves are silent and twigs are loud, but you don't need either here. Just push.",
+    "grid": [
+      "#######",
+      "#S...D#",
+      "#P.M.B#",
+      "#LLL.D#",
+      "#######"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Around the Corner",
+    "noiseLimit": 18,
+    "par": 12,
+    "tip": "Push the monkey right, then get above it and push it down.",
+    "grid": [
+      "#######",
+      "#S....#",
+      "#..M..#",
+      "#P....#",
+      "#....B#",
+      "#######"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "The Quiet Detour",
+    "noiseLimit": 10,
+    "par": 6,
+    "tip": "The shortcut crunches on a dry twig. The long way over the leaves is silent.",
+    "grid": [
+      "#######",
+      "#..M.B#",
+      "#LD####",
+      "#LLLPS#",
+      "#######"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Two Monkeys, One Nap",
+    "noiseLimit": 15,
+    "par": 10,
+    "tip": "Stand in the middle and push one monkey each way.",
+    "grid": [
+      "#######",
+      "#BM.MB#",
+      "#.....#",
+      "#P.S..#",
+      "#######"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Leafy Lullaby",
+    "noiseLimit": 14,
+    "par": 7,
+    "tip": "The leaves on the lower path are silent. Keep your pushes short and steady.",
+    "grid": [
+      "########",
+      "#S.....#",
+      "#P.M..B#",
+      "#LLLL..#",
+      "########"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Twiggy Business",
+    "noiseLimit": 18,
+    "par": 9,
+    "tip": "One twig lies in the straight route. A detour may be quieter, if you can get behind the monkey.",
+    "grid": [
+      "########",
+      "#S.....#",
+      "#P.MD.B#",
+      "#LLLL..#",
+      "########"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "A Sloth-Sized Detour",
+    "noiseLimit": 20,
+    "par": 9,
+    "tip": "The sloth blocks the direct approach. Walk around before lining up behind the monkey.",
+    "grid": [
+      "########",
+      "#...B..#",
+      "#S.M...#",
+      "#P.....#",
+      "#...D..#",
+      "########"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Banana Backtrack",
+    "noiseLimit": 17,
+    "par": 6,
+    "tip": "The monkey is between you and its banana. Push it left, one careful step at a time.",
+    "grid": [
+      "########",
+      "#S.....#",
+      "#B.M..P#",
+      "#LLLL..#",
+      "########"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "The Quiet Encore",
+    "noiseLimit": 24,
+    "par": 8,
+    "tip": "Two monkeys, two bananas. Stand between the monkeys, then plan each push.",
+    "grid": [
+      "########",
+      "#BM.M.B#",
+      "#..P...#",
+      "#L.D.L.#",
+      "#S.....#",
+      "########"
+    ]
+  }
+]
